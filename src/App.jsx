@@ -16,15 +16,13 @@ function App() {
             accept: "application/json",
             Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`,
           },
-        }
+        },
       );
 
       const data = await response.json();
-
-      const filteredMovies = data.results.filter(
-        (movie) => movie.adult === false
+      const filteredMovies = (data.results || []).filter(
+        (m) => m.adult === false,
       );
-
       setMovies(filteredMovies);
     };
 
@@ -49,6 +47,5 @@ function App() {
     </div>
   );
 }
-console.log(import.meta.env.VITE_TMDB_ACCESS_TOKEN);
 
 export default App;
